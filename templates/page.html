@@ -3,6 +3,16 @@
 {% block body %}
   <h2>{{ this.title }}</h2>
   {{ this.body }}
+
+  <nav>
+    <ul class="nav">
+      {% for child in this.children %}
+        <li{% if this == child %} class="active"{% endif
+          %}><a href="{{ child|url }}">{{ child.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+
   {% for image in this.attachments.images %}
     <a href="{{ image|url }}">
       <img src="{{ image|url }}" width="300">
