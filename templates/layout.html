@@ -5,13 +5,13 @@
 <body>
   {% set root = site.get_root() %}
   <header>
-    <h1><a href="{{ root.url }}" style="text-decoration: none">{{ root.title }}</a></h1>
+    <h1><a href="{{ root.path }}" style="text-decoration: none">{{ root.title }}</a></h1>
 
     <nav>
       <ul class="nav navbar-nav">
 
         <li>
-            <a href="{{ root.url }}">{{ root.title }}</a>
+            <a href="{{ root.path }}">{{ root.title }}</a>
         </li>
         {% for child in root.children recursive %}
           {% if this.is_child_of(child) %}
