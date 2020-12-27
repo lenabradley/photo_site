@@ -3,21 +3,28 @@
 <link rel="stylesheet" href="{{ '/static/style.css'|url }}">
 <title>{% block title %}Welcome{% endblock %} — photo_site</title>
 <body>
+  {% set root = site.get_root() %}
   <header>
-    <h1>photo_site</h1>
+    <h1><a href="{{ root.url }}" style="text-decoration: none">{{ root.title }}</a></h1>
+
     <nav>
       <ul class="nav navbar-nav">
-        <li{% if this._path == '/' %} class="active"{% endif
-          %}><a href="{{ '/'|url }}">Welcome</a></li>
-        {% for href, title in [
-          ['/photos', 'Photos'],
-          ['/about', 'About']
-        ] %}
-          <li{% if this.is_child_of(href) %} class="active"{% endif
-            %}><a href="{{ href|url }}">{{ title }}</a></li>
+
+        <li>
+            <a href="{{ root.url }}">{{ root.title }}</a>
+        </li>
+        {% for child in root.children recursive %}
+          {% if this.is_child_of(child) %}
+              >
+              <li>
+                <a href="{{ child.path }}">{{ child.title }}</a>
+              </li>
+          {% endif %}
+          {{ loop(child.children) }}
         {% endfor %}
       </ul>
     </nav>
+
   </header>
   <div class="page">
     {% block body %}{% endblock %}
