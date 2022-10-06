@@ -15,7 +15,7 @@
 
   {% for image in this.attachments.images %}
     <a href="{{ image|url }}">
-      <img src="{{ image|url }}" width="300">
+      <img src="{{ image.thumbnail(height=512, width=512, mode='crop')|url }}" width="300">
     </a>
   {% endfor %}
 {% endblock %}
